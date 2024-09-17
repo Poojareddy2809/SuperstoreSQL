@@ -1,0 +1,1 @@
+This project focuses on performing a sales analysis using a dataset that contains various sales-related information. The analysis aims to extract key insights such as top sales per customer, average discount by product category, and other vital statistics that can be helpful for business decisions.
