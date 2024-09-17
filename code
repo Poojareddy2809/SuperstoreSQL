@@ -1,0 +1,58 @@
+#creating table
+		CREATE TABLE superstore (
+		OrderID VARCHAR(50),
+		CustomerID VARCHAR(50),
+		CustomerName VARCHAR(100),
+		ProductID VARCHAR(50),
+		ProductName VARCHAR(100),
+		Category VARCHAR(50),
+		Sales DECIMAL(10, 2),
+		Discount DECIMAL(5, 2),
+		City VARCHAR(100),
+		ShipMode VARCHAR(50)
+		);
+		
+#inserting values into table
+		INSERT INTO superstore (OrderID, CustomerID, CustomerName, ProductID, ProductName, Category, Sales, Discount, City, ShipMode) VALUES
+		('CA-2016-152156', 'CG-12520', 'RADHA KRISHNA', 'FUR-BO-10001798', 'Bush Bookcase', 'Furniture', 261.96, 0.00, 'Henderson', 'Second Class'),
+		('CA-2016-152156', 'CG-12520', 'SITA RAM', 'FUR-CH-10000454', 'Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back', 'Furniture', 731.94, 0.00, 'Henderson', 'Second Class'),
+		('CA-2016-138688', 'DV-13045', 'MADHAV', 'OFF-LA-10000240', 'Self-Adhesive Address Labels for Typewriters by Universal', 'Office Supplies', 14.62, 0.00, 'Los Angeles', 'Second Class'),
+		('US-2015-108966', 'BH-11710', 'GOVIND', 'OFF-ST-10000760', 'Staples in misc. colors', 'Office Supplies', 68.81, 0.80, 'San Francisco', 'Standard Class'),
+		('CA-2014-115812', 'AR-10780', 'NANDH KISHORE', 'FUR-FU-10001487', 'SAFCO Industrial Shelving Unit', 'Furniture', 35.00, 0.00, 'New York City', 'Second Class'),
+		('CA-2016-118489', 'BA-11515', 'GOWRI SHANKER', 'OFF-AR-10003056', 'Avery Legal File Tab Inserts', 'Office Supplies', 4.54, 0.00, 'New York City', 'Standard Class'),
+		('CA-2014-105893', 'BF-11415', 'MOON', 'TEC-PH-10002033', 'Canon ImageCLASS 2200 Advanced Copier', 'Technology', 651.97, 0.20, 'Los Angeles', 'Standard Class'),
+		('CA-2016-121755', 'CS-12490', 'khanakunj', 'FUR-TA-10000577', 'Chromcraft Rectangular Conference Tables', 'Furniture', 600.00, 0.10, 'San Diego', 'First Class'),
+		('US-2015-108966', 'JD-15820', 'theJNV', 'OFF-BI-10003910', 'Binder', 'Office Supplies', 200.50, 0.10, 'San Francisco', 'Standard Class'),
+		('CA-2014-110422', 'JK-14670', 'keshav mohan', 'TEC-PH-10004567', 'iPhone', 'Technology', 800.00, 0.15, 'Seattle', 'Same Day');
+		
+#display table
+		SELECT * FROM superstore;
+		
+#1.Top Sales per Customer 
+		SELECT CustomerID, CustomerName, SUM(Sales) AS TotalSales
+		FROM superstore
+		GROUP BY CustomerID, CustomerName
+		ORDER BY TotalSales DESC;
+		
+#2.Average Discount by Product Category
+		SELECT Category, AVG(Discount) AS AvgDiscount
+		FROM superstore
+		GROUP BY Category;
+		
+#3.Top 5 Cities by Total Sales
+		SELECT City, SUM(Sales) AS TotalSales
+		FROM superstore
+		GROUP BY City
+		ORDER BY TotalSales DESC
+		LIMIT 5;
+		
+#4.Product with sales greater than $5000
+		SELECT ProductID, ProductName, SUM(Sales) AS TotalSales
+		FROM superstore
+		GROUP BY ProductID, ProductName
+		HAVING SUM(Sales) > 5000;
+		
+#5.Number of Orders per Shipping Mode
+		SELECT ShipMode, COUNT(OrderID) AS NumberOfOrders
+		FROM superstore
+		GROUP BY ShipMode;
